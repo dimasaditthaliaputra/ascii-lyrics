@@ -405,6 +405,25 @@ API yang tersedia:
 - **Simulasi:** untuk layer yang menyimpan state (partikel), override `update(dt, t, rect)`
   dan `reset()`. `reset()` dipanggil setelah seek.
 
+### 6.3 Checklist komponen baru (untuk kamu atau AI agent)
+
+Panduan lengkap untuk agent ada di [AGENTS.md](AGENTS.md). Ringkasnya:
+
+1. **Layer baru:** kelas turunan `Layer` + `@register`, impor modulnya di
+   `lyricviz/layers/__init__.py`, tambahkan barisnya di tabel 6.1.
+2. **Sprite baru:** tulis frame dan fungsi aturan warna di `lyricviz/art/sprites.py`
+   (`Sprite(frames, auto_masks(frames, rule))`), daftarkan di `LIBRARY`, beri warna
+   bawaan di `SpriteLayer.PALETTES` (`lyricviz/layers/illustrations.py`).
+3. **Aturan yang sering terlewat:** sel terminal kira-kira 2:1 (koreksi bentuk bulat);
+   pakai `random.Random(self.seed)`, bukan `random` global; layer yang punya state wajib
+   mengisi `reset()`; kalikan semua warna dengan `alpha`; pakai `self.g(unicode, ascii)`
+   atau daftarkan glyph di `ASCII_FALLBACK`; hindari karakter lebar (emoji/CJK).
+4. **Warna** dari tema (`@glow`, `@accent`, `@petals`, ...). Daftar kunci ada di `THEMES`
+   di `lyricviz/themes.py`.
+5. **Cek:** `python -m unittest discover`, `--validate`, lalu lihat hasilnya dengan
+   `--snapshot` atau `tools/frame_to_png.py` di ukuran kecil (60×18) dan besar, juga
+   dengan `--ascii`.
+
 ---
 
 ## 7. Album artwork

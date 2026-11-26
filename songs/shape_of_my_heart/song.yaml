@@ -1,0 +1,76 @@
+# Shape of My Heart - Backstreet Boys
+# ---------------------------------------------------------------------------
+# Scaffold: metadata, theme and scenes are set up, the lyrics are not.
+# Fill in `lyrics:` yourself, then calibrate the timings with:
+#   python tools/tap_sync.py shape_of_my_heart
+# (put your copy of the track next to this file as shape_of_my_heart.mp3)
+#
+# Lyric markup:  *word*  = emphasis (glows, pulses, throws sparkles)
+# Per line keys: t (start), end | dur, reveal (typing time), effect,
+#                words (explicit per-word start times), big (block font)
+# ---------------------------------------------------------------------------
+
+song:
+  title: Shape of My Heart
+  artist: Backstreet Boys
+  duration: 230.0          # approximate, adjust to your file
+  bpm: 96                  # approximate, adjust to your file
+  # audio: shape_of_my_heart.mp3   # uncomment once the file is next to this yaml
+
+artwork:
+  # image: artwork.png     # uncomment once you add a cover (else a generated one is used)
+  contrast: 1.3
+  saturation: 1.2
+
+defaults:
+  theme: midnight
+  gap: 0.15
+  transition: {type: dissolve, duration: 1.4}
+  lyrics: {effect: typewriter, glass: true}
+
+lyrics:
+  # TODO: add lines here, e.g.
+  # - {t: 12.0, end: 16.0, text: "your line with a *highlighted* word"}
+  - {t: 2.0, end: 5.0, text: "*Shape of My Heart*", big: true, effect: fade, reveal: 2.0}
+
+scenes:
+  - name: intro
+    start: 0
+    layout: right
+    split: 0.5
+    theme: midnight
+    lyrics: {glass: false}
+    layers:
+      - {type: gradient}
+      - {type: stars, density: 0.02, shooting: 6}
+      - {type: bokeh, count: 6, strength: 0.25}
+      - {type: artwork, mode: focus, region: art, size: 0.74, pos: [0.52, 0.5], reveal: 3.0,
+         border_time: 5.0}
+      - {type: title, text: "SHAPE OF MY HEART", region: lyrics, pos: [0.5, 0.2], start: 1.5,
+         letter_delay: 0.07, subtitle: "Backstreet Boys"}
+      - {type: vignette, strength: 0.5}
+
+  - name: verse
+    start: 8
+    layout: left
+    theme: midnight
+    transition: {type: wipe, duration: 1.4}
+    layers:
+      - {type: gradient}
+      - {type: stars, density: 0.03, shooting: 5}
+      - {type: fireflies, count: 6, region: art, color: "#9fe8ff"}
+      - {type: vignette, strength: 0.5}
+
+  - name: chorus
+    start: 60
+    layout: right
+    theme: dusk_rose
+    transition: {type: bloom, duration: 1.6}
+    layers:
+      - {type: gradient, breathe: 0.08}
+      - {type: bokeh, count: 8, strength: 0.3}
+      - {type: mesh, shape: heart, pos: [0.5, 0.5], size: 0.3, spin: 0.8, pitch: 0.2, bpm: 96,
+         colors: ["#ff2e63", "#ff5c85", "#ff8fab"]}
+      - {type: hearts, rate: 3}
+      - {type: pulse, bpm: 96, strength: 0.08}
+      - {type: vignette, strength: 0.5}
