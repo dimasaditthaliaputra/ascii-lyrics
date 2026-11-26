@@ -1,0 +1,202 @@
+# Drop Dead - Olivia Rodrigo
+# ---------------------------------------------------------------------------
+# All times are in seconds from the start of the song.
+#
+# TIMING NOTE: these timestamps are a hand-made approximation of the vocal
+# phrasing. Drop your own copy of the track next to this file (song.audio)
+# and calibrate with:   python tools/tap_sync.py drop_dead
+# which records a tap per line and prints updated `t:` values.
+#
+# Lyric markup:  *word*  = emphasis (glows, pulses, throws sparkles)
+# Per line keys: t (start), end | dur, reveal (typing time), effect,
+#                words (explicit per-word start times), big (block font)
+# ---------------------------------------------------------------------------
+
+song:
+  title: Drop Dead
+  artist: Olivia Rodrigo
+  duration: 58.0
+  bpm: 118
+  audio: drop_dead.mp3     # optional, needs `pip install pygame-ce`
+  # audio_offset: 0.0        # shift if your file has a longer/shorter intro
+
+artwork:
+  # Put the real cover here (any image Pillow can read). If the file is
+  # missing a generated stand-in cover is used, so the scenes still work.
+  image: artwork.png
+  contrast: 1.35
+  saturation: 1.25
+
+defaults:
+  theme: dusk_rose
+  gap: 0.15
+  transition: {type: dissolve, duration: 1.2}
+  lyrics: {effect: typewriter, glass: true}
+
+lyrics:
+  - {t: 1.14,  end: 1.44,  text: "*Ohh*", big: true, effect: fade, reveal: 2.0}
+
+  - {t: 1.98,  end: 5.24, text: "One night I was *bored* in bed"}
+  - {t: 5.39, end: 8.36, text: "And stalked you on the *internet*"}
+
+  - {t: 8.71, end: 12.26, text: "It's *feminine intuition*", effect: wave}
+  - {t: 12.41, end: 15.65, text: "'Cuz I always had a *vision* of us standing like this",
+     effect: wave, reveal: 3.8}
+
+  - {t: 16.10, end: 19.70, text: "All pressed up in the bathroom line", effect: rise}
+  - {t: 19.85, end: 23.52, text: "You're looking like an *angel* on the walls of *Versailles*",
+     effect: rise, reveal: 4.0}
+
+  - {t: 23.97, end: 26.95, text: "The most *alive* I've ever been", effect: pop}
+
+  - {t: 27.20, end: 31.09, text: "But *kiss me* and I might", effect: wave}
+  - {t: 31.24, end: 34.94, text: "*Kiss me* and I might", effect: wave}
+
+  - {t: 35.09, end: 37.22, text: "*Kiss me* and I might", effect: wave,
+     words: [35.09, 35.44, 35.99, 36.29, 36.69]}
+  - {t: 37.37, end: 39.87, text: "*drop dead*", big: true, effect: drop,
+     words: [37.37, 37.82]}
+
+scenes:
+  # -- Intro: the cover is the star; vines creep around it ------------------
+  - name: intro
+    start: 0
+    layout: right
+    split: 0.5
+    theme: dusk_rose
+    lyrics: {glass: false}
+    layers:
+      - {type: gradient}
+      - {type: bokeh, count: 7, strength: 0.3}
+      - {type: stars, density: 0.012, shooting: 0}
+      - {type: artwork, mode: focus, region: art, size: 0.74, pos: [0.52, 0.5], reveal: 3.0,
+         border_time: 5.0}
+      - {type: petals, rate: 1.2, wind: 0.8, fall: 2.0, start: 1.5, fade_in: 2.0}
+      - {type: title, text: "DROP DEAD", region: lyrics, pos: [0.5, 0.2], start: 4.2,
+         letter_delay: 0.09, subtitle: "Olivia Rodrigo"}
+      - {type: vignette, strength: 0.55}
+
+  # -- Scene 1: bored in bed, phone glow, a pot of flowers by the window ----
+  - name: night_scroll
+    start: 1.28
+    layout: left
+    theme: midnight
+    transition: {type: wipe, duration: 1.4}
+    layers:
+      - {type: gradient}
+      - {type: stars, density: 0.03, shooting: 5}
+      - {type: window, box: [0.05, 0.07, 0.56, 0.5], pots: 2}
+      - {type: phone, pos: [0.76, 0.6], width: 0.36, height: 0.62, start: 0.4, fade_in: 0.8}
+      - {type: petals, rate: 1.0, wind: 0.5, fall: 1.6, colors: ["#f3c4ff", "#c8b6ff"]}
+      - {type: fireflies, count: 6, region: art, color: "#9fe8ff"}
+      - {type: vignette, strength: 0.5}
+
+  # -- Scene 2: intuition / a vision of us in a crystal ball ----------------
+  - name: intuition
+    start: 8.41
+    layout: right
+    theme: lavender_dream
+    transition: {type: bloom, duration: 1.6}
+    layers:
+      - {type: gradient, to: ["#1a0b30", "#3b1f63", "#6b3f95", "#b07cc6"], shift: [0, 7]}
+      - {type: bokeh, count: 8, strength: 0.25}
+      - {type: sparkles, rate: 10}
+      - {type: crystal_ball, pos: [0.5, 0.4], size: 0.33, content: couple, reveal: 3.1}
+      - {type: garden, region: art, count: 7, height: [0.12, 0.22], size: 0.06,
+         grow: [0.5, 5.0], bloom: [3.0, 7.0], ground: 0.99}
+      - {type: artwork, mode: decor, region: art, size: 0.2, pos: [0.13, 0.22],
+         caption: "us?", start: 1.0, fade_in: 1.2}
+      - {type: petals, rate: 2.0, wind: -0.6, colors: "@petals"}
+      - {type: vignette, strength: 0.45}
+
+  # -- Scene 3: bathroom line, angel on the walls of Versailles -------------
+  - name: versailles
+    start: 15.70
+    layout: left
+    theme: versailles_gold
+    transition: {type: petal_rain, duration: 1.5}
+    layers:
+      - {type: gradient}
+      - {type: wallpaper, strength: 0.16}
+      - {type: rays, source: [0.9, -0.15], strength: 0.2, count: 6}
+      - {type: mesh, shape: flower, pos: [0.3, 0.66], size: 0.26, spin: 0.45, pitch: 0.3,
+         bloom: [[0, 0.1], [3.5, 1.0]], colors: ["#ff8fab", "#ffb6c1"]}
+      - {type: frame, box: [0.44, 0.06, 0.52, 0.5], start: 3.6, fade_in: 1.0}
+      - {type: sprite, name: cherub, pos: [0.7, 0.31], fps: 3, start: 4.0, fade_in: 1.2, bob: 0.8}
+      - {type: sparkles, rate: 7, colors: ["#fff7c2", "#ffd27a"]}
+      - {type: petals, rate: 3.0, wind: 1.2, colors: "@petals"}
+      - {type: vignette, strength: 0.5}
+
+  # -- Scene 4: the most alive I've ever been --------------------------------
+  - name: alive
+    start: 23.57
+    layout: right
+    theme: bloom
+    transition: {type: flash, duration: 0.8}
+    layers:
+      - {type: gradient, breathe: 0.08}
+      - {type: bokeh, count: 6, strength: 0.32}
+      - {type: hills, colors: ["#24432f", "#2f5c3d", "#3c7a4c"], height: 0.12}
+      - {type: garden, count: 11, height: [0.22, 0.45], size: 0.1, ground: 0.99}
+      - {type: heartbeat, region: art, y: 0.34, amp: 0.22, bpm: 118, color: "#ff6fa8"}
+      - {type: butterflies, count: 5, big: 2, speed: 1.4}
+      - {type: hearts, rate: 3.0}
+      - {type: petals, rate: [[0, 6], [4, 14]], wind: 2.2, flutter: 3.5}
+      - {type: pulse, bpm: 118, strength: 0.07, color: "#ff8fb8"}
+
+  # -- Chorus build: kiss me and I might ------------------------------------
+  - name: kiss
+    start: 27.00
+    layout: left
+    theme: passion
+    transition: {type: dissolve, duration: 0.9}
+    layers:
+      - {type: gradient}
+      - {type: bokeh, count: 8, strength: 0.32, colors: ["#ff2e63", "#ff8fab", "#b0234a"]}
+      - {type: artwork, mode: inspired, region: art, size: 0.9, pos: [0.5, 0.5], start: 0,
+         opacity: 0.35}
+      - {type: mesh, shape: heart, pos: [0.5, 0.5], size: 0.3, spin: 1.1, pitch: 0.2, bpm: 118,
+         colors: ["#ff2e63", "#ff5c85", "#ff8fab"]}
+      - {type: petals, rate: [[0, 8], [5, 22]], wind: 1.0, swirl: [[0, 0.2], [5, 0.9]], flutter: 3}
+      - {type: hearts, rate: 4, colors: ["#ff5c85", "#ffffff"]}
+      - {type: pulse, bpm: 118, strength: 0.1}
+      - {type: vignette, strength: 0.55}
+
+  # -- Finale: every bud bursts open on "drop dead" -------------------------
+  - name: drop_dead
+    start: 34.99
+    layout: top
+    theme: bloom
+    transition: {type: bloom, duration: 0.8}
+    layers:
+      - {type: gradient, to: ["#2a0820", "#7a1f4a", "#d8506e", "#ffb3a7"], shift: [2.2, 3.4]}
+      - {type: stars, density: 0.015, shooting: 0}
+      - {type: bokeh, count: 9, strength: 0.3}
+      - {type: hills, colors: ["#24432f", "#2f5c3d"], height: 0.1, grass: false}
+      - {type: garden, count: 16, height: [0.22, 0.5], size: 0.08, bloom_at: 2.4,
+         bloom_spread: 0.3, ground: 0.98}
+      - {type: burst, region: full, at: [2.4], origin: [0.5, 0.62], count: 260, power: 34}
+      - {type: butterflies, count: 6, big: 2, start: 2.6, fade_in: 1.0, speed: 1.6}
+      - {type: petals, rate: [[0, 4], [2.4, 4], [2.5, 26], [5, 10]], wind: 1.5, flutter: 3.5}
+      - {type: pulse, hits: [2.4], strength: 0.6, color: "#ffffff", decay: 2.2}
+      - {type: vignette, strength: 0.4}
+
+  # -- Outro: the cover returns, crumbles into petals; one rose remains -----
+  - name: outro
+    start: 40.09
+    layout: bottom
+    theme: dusk_rose
+    transition: {type: fade, duration: 1.6}
+    layers:
+      - {type: gradient, to: ["#050207", "#12061a", "#2c0f2e", "#4a1838"], shift: [4, 11]}
+      - {type: stars, density: 0.02}
+      - {type: artwork, mode: focus, region: full, size: 0.72, pos: [0.5, 0.45], reveal: 1.5,
+         border: false, until: 4.2, fade_out: 0.3}
+      - {type: artwork, mode: fade, region: full, size: 0.72, pos: [0.5, 0.45], start: 4.2,
+         duration: 3.5, fade_in: 0, until: 8.5}
+      - {type: rose, region: full, pos: [0.5, 0.42], size: 0.2, bloom: [[6, 0], [9, 1]],
+         start: 6.0, fade_in: 2.0}
+      - {type: petals, rate: [[0, 5], [6, 2], [10, 0]], wind: 0.6, fall: 1.8}
+      - {type: caption, text: "Drop Dead  ·  Olivia Rodrigo", pos: [0.5, 0.9], start: 8.0,
+         char_delay: 0.06}
+      - {type: vignette, strength: 0.6}

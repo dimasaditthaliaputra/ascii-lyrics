@@ -1,0 +1,71 @@
+# Winter Demo - original placeholder lyrics written for this project.
+# Shows the mood presets: christmas -> sad -> dreamy -> dark.
+
+song:
+  title: First Snow
+  artist: lyricviz demo
+  duration: 42.0
+
+artwork:
+  enabled: false        # no cover for this one; artwork layers are simply skipped
+
+defaults:
+  transition: {type: dissolve, duration: 1.4}
+  lyrics: {effect: typewriter}
+
+lyrics:
+  - {t: 1.0,  end: 4.2,  text: "*Snow* on the windowsill"}
+  - {t: 4.5,  end: 7.8,  text: "Little lights blinking red and *gold*"}
+  - {t: 8.0,  end: 11.6, text: "Your hand is a *fireplace* in the cold", effect: wave}
+
+  - {t: 13.2, end: 16.2, text: "Then the *rain* came in", effect: fade}
+  - {t: 16.5, end: 21.0, text: "Washing all the white away", effect: fade, reveal: 3.5}
+
+  - {t: 23.0, end: 26.6, text: "Still I count the *stars* for you", effect: rise}
+  - {t: 27.0, end: 31.4, text: "One for every word we didn't say", effect: rise}
+
+  - {t: 33.0, end: 38.0, text: "*goodnight*", big: true, effect: drop, reveal: 0.8}
+
+scenes:
+  - name: first_snow
+    start: 0
+    layout: left
+    theme: christmas
+    atmosphere: christmas
+    layers:
+      - {type: tree, region: art, pos: [0.38, 0.9], size: 0.62}
+      - {type: sprite, name: snowman, region: art, pos: [0.78, 0.72], fps: 1.5, bob: 0.2}
+      - {type: sparkles, rate: 4, colors: ["#ffdf6e", "#ffffff"]}
+      - {type: vignette, strength: 0.45}
+
+  - name: rain
+    start: 12.4
+    layout: right
+    theme: rain
+    atmosphere: sad
+    transition: {type: wipe_left, duration: 1.6}
+    layers:
+      - {type: sprite, name: snowman, region: art, pos: [0.5, 0.78], fps: 0.5, bob: 0.0,
+         palette: {s: "#9fb2c4", h: "#1f2530"}}
+      - {type: vignette, strength: 0.6}
+
+  - name: stars
+    start: 22.2
+    layout: left
+    theme: midnight
+    atmosphere: dreamy
+    transition: {type: bloom, duration: 1.8}
+    layers:
+      - {type: moon, region: art, pos: [0.6, 0.3], size: 0.12, phase: 0.55}
+      - {type: fireflies, region: art, count: 9}
+      - {type: hills, colors: ["#141a3a", "#1c2550", "#26326a"], height: 0.2, grass: false}
+
+  - name: goodnight
+    start: 32.2
+    layout: center
+    theme: shadow
+    atmosphere: dark
+    transition: {type: fade, duration: 1.6}
+    layers:
+      - {type: stars, density: 0.01, shooting: 3}
+      - {type: caption, text: "lyricviz  ·  demo song", pos: [0.5, 0.92], start: 6.0}
